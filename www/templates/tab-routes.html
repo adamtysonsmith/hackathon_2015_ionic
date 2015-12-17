@@ -1,0 +1,12 @@
+<ion-view view-title="All Routes">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-avatar item-icon-right" ng-repeat="route in routes" type="item-text-wrap" href="#/tab/routes/{{route.route_id}}">
+<!--        <img ng-src="{{chat.face}}">-->
+        <h2>{{route.route_id}}</h2>
+        <p>{{route.headsign}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

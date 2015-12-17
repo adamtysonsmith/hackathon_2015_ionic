@@ -1,0 +1,41 @@
+<ion-view view-title="Select a Trip">
+  <ion-content>
+   
+    <!-- Controls-->
+      <h2 id="time-select" class="time-select">{{timeOutput}}</h2>
+      <div class="item range">
+        <i class="icon ion-ios-clock"></i>
+        <input id="time" type="range" name="time" min="0" max="47" step="1">
+      </div>
+
+      <div class="button-bar">
+        <a class="button">M</a>
+        <a class="button">T</a>
+        <a class="button">W</a>
+        <a class="button button-positive">TR</a>
+        <a class="button">F</a>
+        <a class="button">SA</a>
+        <a class="button">SU</a>
+      </div>
+
+      <div ng-show="northbound" class="button-bar">
+        <a class="button">Northbound</a>
+        <a class="button">Southbound</a>
+      </div>
+
+      <div ng-show="eastbound" class="button-bar">
+        <a class="button">Eastbound</a>
+        <a class="button">Westbound</a>
+      </div>
+    
+    
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="trip in trips" type="item-text-wrap" href="#/tab/routes/trips/{{trip.trip_id}}">
+        <h2>{{trip.route_id}}</h2>
+        <p>{{trip.route_name}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+    
+  </ion-content>
+</ion-view>
