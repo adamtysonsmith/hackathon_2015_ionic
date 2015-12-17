@@ -3,3 +3,21 @@
   text-align: center;
   padding-top: 10px;
 }
+
+.day-select .button {
+    font-size: 14px;
+}
+
+.day-select label .radio-content .item-content {
+    background-color: #f8f8f8;
+    padding: 0;
+}
+
+.button.item.item-radio {
+    background-color: #f8f8f8;
+}
+
+.direction-select label .radio-content .item-content {
+    background-color: #f8f8f8;
+    padding: 0;
+}

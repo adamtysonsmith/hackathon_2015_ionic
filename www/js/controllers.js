@@ -17,9 +17,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('RouteDetailCtrl', function($scope, $stateParams, $http) {
-  var now = new Date().toString().split(' ')[4]; // military time
-  var range = document.getElementById('time');
-  var output = document.getElementById('time-select');
   
   var timeInts = [
     { time: '4:00 AM',  m_time: '04:00:00' },
@@ -72,7 +69,26 @@ angular.module('starter.controllers', [])
     { time: '3:30 AM',  m_time: '03:30:00' }
   ];
   
+  // Time Controls
+  var now = new Date().toString().split(' ')[4]; // military time
+  var range = document.getElementById('time');
+  var output = document.getElementById('time-select');
+    
   $scope.timeOutput = initTime(now);
+  $scope.selectedTime = now;
+
+  range.oninput = function(){
+    var self = this;
+    $scope.$apply(function(){
+        $scope.timeOutput = null;
+        $scope.selectedTime = timeInts[self.value].m_time;
+    });
+    output.innerHTML = timeInts[this.value].time;
+  }
+  
+  $scope.$watch('selectedTime', function(newValue, oldValue){
+      console.log('The time selected is', newValue)
+  });
   
   function initTime(mt) {
     var hour = parseInt(mt.slice(0, 2));
@@ -87,29 +103,35 @@ angular.module('starter.controllers', [])
     }
   }
   
-  range.oninput = function(){
-    $scope.timeOutput = null;
-    output.innerHTML = timeInts[this.value].time;
-  }
-  
+  // Day Controls
+  $scope.selectedDay = initDay();
+
+  $scope.$watch('selectedDay', function(newValue, oldValue){
+      console.log('The day selected is', newValue)
+  });
+    
   function initDay() {
     var days = ['SU','M','T','W','TR','F','SA'];
     var today = days[new Date().getDay()];
     return today;
   }
+    
+    
+  // Direction Controls
+  $scope.$watch('selectedDirection', function(newValue, oldValue){
+      console.log('The direction selected is', newValue)
+  });
   
+    
   // Query all the trips for this route
   $http.get('http://104.131.45.27:3000/trips/' + $stateParams.routeId)
     .success(function(data) {
-      console.log('Success?', typeof data)
       $scope.trips = data;
-    
       if($scope.trips[0].direction === 'NS') {
         $scope.northbound = true;
       } else {
         $scope.eastbound = true;
       }
-      
     });
-  
+
 });
